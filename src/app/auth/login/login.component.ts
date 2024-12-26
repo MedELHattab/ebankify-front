@@ -1,23 +1,34 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Import CommonModule
-import { ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service'; // Ensure correct path to AuthService
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2'; // Import SweetAlert2
 
 @Component({
   selector: 'app-login',
-  standalone: true, // Ensure this is set if the component is standalone
-  imports: [CommonModule, ReactiveFormsModule], // Add these imports here
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterLink,
+  ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {  // Inject AuthService here
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],  // Add required validators
-      password: ['', [Validators.required, Validators.minLength(6)]],  // Add minLength validator
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
@@ -26,15 +37,42 @@ export class LoginComponent {
       const { email, password } = this.loginForm.value;
       this.authService.login(email, password).subscribe(
         (response) => {
-          // Handle the response (store the token, etc.)
+          // Handle successful login
           console.log('Login successful', response);
-          // Store the token in localStorage or do other actions as needed
-          localStorage.setItem('authToken', response.token);
+          localStorage.setItem('authToken', response.token); // Save token to localStorage
+
+          Swal.fire({
+            title: 'Success!',
+            text: 'You have logged in successfully!',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          }).then(() => {
+            this.router.navigate(['/dashboard']); // Redirect to dashboard
+          });
         },
         (error) => {
+          // Handle login failure
           console.error('Login failed', error);
+
+          Swal.fire({
+            title: 'Error!',
+            text: error.error || 'An error occurred during login.',
+            icon: 'error',
+            confirmButtonText: 'Try Again',
+          });
         }
       );
+    } else {
+      Swal.fire({
+        title: 'Invalid Form',
+        text: 'Please fill in the required fields correctly.',
+        icon: 'warning',
+        confirmButtonText: 'OK',
+      });
     }
+  }
+
+  goToRegister() {
+    this.router.navigate(['/register']);
   }
 }
