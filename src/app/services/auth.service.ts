@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 interface LoginResponse {
   token: string;
   expiresIn: number;
+  role: string;
 }
 
 @Injectable({

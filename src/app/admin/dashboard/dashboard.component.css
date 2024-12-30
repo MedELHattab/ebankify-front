@@ -1,0 +1,196 @@
+/* Global Styles */
+:root {
+    --primary-color: #1a73e8;
+    --secondary-color: #f1f3f4;
+    --text-color: #202124;
+    --sidebar-width: 250px;
+  }
+  
+  body {
+    font-family: 'Roboto', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--text-color);
+    background-color: #f8f9fa;
+  }
+  
+  /* Dashboard Container */
+  .dashboard-container {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  /* Sidebar Styles */
+  .sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--secondary-color);
+    padding: 20px 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sidebar nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar nav ul li a {
+    display: block;
+    padding: 15px 20px;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .sidebar nav ul li a:hover,
+  .sidebar nav ul li a.active {
+    background-color: #e8f0fe;
+    color: var(--primary-color);
+  }
+  
+  /* Main Content Styles */
+  .main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  h1, h2, h3 {
+    margin: 0 0 20px 0;
+  }
+  
+  .user-menu button {
+    background-color: transparent;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    margin-left: 15px;
+    font-size: 14px;
+  }
+  
+  /* Account Summary Styles */
+  .account-cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .account-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .account-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .account-card .balance {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+  }
+  
+  .account-card .account-number {
+    color: #5f6368;
+    font-size: 14px;
+  }
+  
+  /* Recent Transactions Styles */
+  .recent-transactions table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .recent-transactions th,
+  .recent-transactions td {
+    padding: 12px 15px;
+    text-align: left;
+  }
+  
+  .recent-transactions thead {
+    background-color: var(--secondary-color);
+  }
+  
+  .recent-transactions tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+  }
+  
+  /* Quick Actions Styles */
+  .action-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .action-buttons button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .action-buttons button:hover {
+    background-color: #1765cc;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .dashboard-container {
+      flex-direction: column;
+    }
+  
+    .sidebar {
+      width: 100%;
+      padding: 10px 0;
+    }
+  
+    .sidebar nav ul {
+      display: flex;
+      overflow-x: auto;
+    }
+  
+    .sidebar nav ul li {
+      flex: 0 0 auto;
+    }
+  
+    .sidebar nav ul li a {
+      padding: 10px 15px;
+    }
+  
+    .main-content {
+      padding: 10px;
+    }
+  
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .user-menu {
+      margin-top: 10px;
+    }
+  
+    .account-card {
+      min-width: 100%;
+    }
+  } 

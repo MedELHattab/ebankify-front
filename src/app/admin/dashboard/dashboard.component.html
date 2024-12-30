@@ -1,1 +1,51 @@
-<p>dashboard works!</p>
+<div class="flex min-h-screen bg-gray-100">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white shadow-md">
+        <div class="p-4">
+            <h1 class="text-lg font-bold">Admin Dashboard</h1>
+        </div>
+        <ul class="space-y-2 px-4">
+            <li>
+                <a href="/admin/dashboard"
+                    class="flex items-center space-x-3 p-2 text-gray-700 rounded-lg hover:bg-gray-100">
+                    <svg class="w-6 h-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 10h11M9 21V3m4 18l7-9-7-9"></path>
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin/users-management"
+                    class="flex items-center space-x-3 p-2 text-gray-700 rounded-lg hover:bg-gray-100">
+                    <svg class="w-6 h-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 10h11M9 21V3m4 18l7-9-7-9"></path>
+                    </svg>
+                    <span>User Management</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6">
+        <h2 class="text-2xl font-bold mb-4">Welcome, Admin!</h2>
+        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="text-lg font-bold">Total Users</h3>
+                <p class="text-2xl">1,234</p>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="text-lg font-bold">Revenue</h3>
+                <p class="text-2xl">$12,345</p>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="text-lg font-bold">Pending Tasks</h3>
+                <p class="text-2xl">5</p>
+            </div>
+        </div>
+    </main>
+</div>

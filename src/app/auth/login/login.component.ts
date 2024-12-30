@@ -4,7 +4,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { Router, RouterLink } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../../services/auth.service';
-import Swal from 'sweetalert2'; // Import SweetAlert2
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -37,21 +37,36 @@ export class LoginComponent {
       const { email, password } = this.loginForm.value;
       this.authService.login(email, password).subscribe(
         (response) => {
-          // Handle successful login
           console.log('Login successful', response);
-          localStorage.setItem('authToken', response.token); // Save token to localStorage
+          // Save token and role to localStorage
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('role', response.role); // Assuming role is provided in the response
+
+          // Redirect based on role
+          switch (response.role) {
+            case 'ADMIN':
+              console.log('Redirecting to admin dashboard');
+              this.router.navigate(['admin/dashboard']); // Admin dashboard
+              break;
+            case 'USER':
+              this.router.navigate(['/user/profile']); // User profile
+              break;
+            case 'EMPLOYEE':
+              this.router.navigate(['/employee/client-view']); // Employee view
+              break;
+            default:
+              this.router.navigate(['/home']); // Default redirection
+              break;
+          }
 
           Swal.fire({
             title: 'Success!',
             text: 'You have logged in successfully!',
             icon: 'success',
             confirmButtonText: 'OK',
-          }).then(() => {
-            this.router.navigate(['/dashboard']); // Redirect to dashboard
           });
         },
         (error) => {
-          // Handle login failure
           console.error('Login failed', error);
 
           Swal.fire({
